@@ -86,7 +86,7 @@ def main():
             if len(output_path) == 0:
                 continue
             pdf_document.save(output_path)
-            eg.print(f"マルチページTiffを {output_path} に保存しました。")
+            eg.print(f"PDFを {output_path} に保存しました。")
 
         if event == "Open":
             # ファイル追加ボタン押下時の動作
@@ -131,7 +131,7 @@ def main():
 
             page_num = int(values["-page_list-"][0])
             result = frm_crop(pdf_document, page_num )  # サブウィンドウを開いて結果を取得
-
+            print(result)
             pdf_document = result
             image_file_list = [ a for a in range(0,pdf_document.page_count)]
             window.get_element_by_key('-page_list-').update(values=image_file_list)

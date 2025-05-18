@@ -11,14 +11,18 @@ ClassName=TProjectFilesNode
 
 [Project\ChildNodes\Node0\ChildNodes\Node0]
 ClassName=TProjectFileNode
-FileName=$[Project-Path]src\pdf_edit_crop.py
+FileName=$[Project-Path]old\dev_pdf_editor.py
 
 [Project\ChildNodes\Node0\ChildNodes\Node1]
+ClassName=TProjectFileNode
+FileName=$[Project-Path]src\pdf_edit_crop.py
+
+[Project\ChildNodes\Node0\ChildNodes\Node2]
 ClassName=TProjectFileNode
 FileName=$[Project-Path]src\pdf_edit_main.py
 
 [Project\ChildNodes\Node0\ChildNodes]
-Count=2
+Count=3
 
 [Project\ChildNodes\Node1]
 ClassName=TProjectRunConfiguationsNode

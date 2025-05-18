@@ -127,10 +127,31 @@ def frm_crop(pdf_document, page_num):
     frm_canvas = window["-canvas-"]
 
     # 画像プレビュー画面に選択された画像を表示する。
-    img, resize_rate = render_pdf_page(pdf_document, page_num, PREVIEW_CANVAS_SIZE)
+    ## 現在のクロップボックス(トリミング範囲)を取得
+    page = pdf_document[page_num]
+    current_cropbox = page.cropbox
+    ## 元のページ範囲（MediaBox）を取得
+    original_box = page.mediabox
+    page.set_cropbox(original_box) # トリミングを解除
+    img, resize_rate = render_pdf_page(pdf_document, page_num, PREVIEW_CANVAS_SIZE) # トリミング前画像でプレビュー画面用の画像を取得
+    page.set_cropbox(current_cropbox) # トリミングを再設定
     print(resize_rate)
     tk_img = ImageTk.PhotoImage(img)
     frm_canvas.create_image(0, 0, image=tk_img, anchor="nw")
+
+    # 初期のトリミング範囲を描画
+    ## テキストボックス用
+    x1_txt,y1_txt,x2_txt,y2_txt = current_cropbox # (x1,y1,x2,y2)
+    window['-left-'].set_text(pt_to_mm(x1_txt)) # x1
+    window['-top-'].set_text(pt_to_mm(y1_txt)) # y1
+    window['-width-'].set_text(pt_to_mm((x2_txt-x1_txt))) # x2 - x1
+    window['-height-'].set_text(pt_to_mm((y2_txt-y1_txt))) # y2 - y1
+
+    ## プレビュー用
+    x1,y1,x2,y2 = current_cropbox * resize_rate
+    frm_canvas.delete("selection_rectangle")
+    frm_canvas.create_rectangle(x1, y1, x2, y2, outline="red", tag="selection_rectangle")
+
 
     # (3) event loop
     while True:
@@ -141,7 +162,8 @@ def frm_crop(pdf_document, page_num):
             return "OKが選択されました"
         elif event in ["キャンセル", eg.WINDOW_CLOSED]:
             window.close()
-            return "キャンセルされました"
+            print("キャンセルされました")
+            return pdf_document
 
         # 適用ボタン押下時の処理
         if event == "-app-":
