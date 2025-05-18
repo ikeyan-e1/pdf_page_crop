@@ -2,6 +2,9 @@
 test_data/
 old/
 *.exe
+nuitka-crash-report.xml
+*.dist/
+*.build/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
