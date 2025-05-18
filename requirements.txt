@@ -1,0 +1,15 @@
+build==1.2.2.post1
+colorama==0.4.6
+Nuitka==2.6.9
+ordered-set==4.1.0
+packaging==24.2
+pillow==11.2.1
+PyMuPDF==1.25.5
+pyperclip==1.9.0
+pyproject_hooks==1.1.0
+setuptools==75.6.0
+sqlite_bro==0.13.1
+TkEasyGUI==1.0.36
+wheel==0.45.1
+winpython==13.1.20250222
+zstandard==0.23.0
