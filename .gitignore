@@ -1,12 +1,7 @@
 # PortableDevelop Env
-Python310/
-module1.build/
-module1.dist/
-module1.onefile-build/
-test_images/
+test_data/
+test_data/
 *.exe
-
-compile.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
